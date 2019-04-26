@@ -34,6 +34,47 @@
 /*    */     }
 /* 35 */     return result;
 /*    */   }
+    /*    */   public String outdoorMapMatching(String originalSrc, String presentSrc , int type)
+    /*    */   {
+//                     输入你的python环境地址
+        /* 12 */     String pythonPath = "/anaconda3/bin/python3.6 ";
+//                     根据type类型选择地图匹配算法的地址，type类型1，2，3分别代表地图匹配算法1，2，3
+        /* 13 */     String filePath ="";
+                     switch(type){
+                         case 1:
+                             filePath = "";
+                         case 2:
+                             filePath = "";
+                         case 3:
+                             filePath = "";
+                     }
+//                     result用来返回地图匹配算法处理后的控制台信息
+        /* 14 */     String result = "";
+        /* 15 */     Process process = null;
+        /* 16 */     List<String> processList = new java.util.ArrayList();
+        /*    */     String line;
+        /* 18 */     try {
+//                           向控制台输入语句来调用python模块，启动地图匹配算法，语句格式：python环境地址+地图匹配算法地址+原轨迹数据文件地址+即将写入的数据文件地址
+                           process = Runtime.getRuntime().exec(pythonPath + filePath + "--r_path " + originalSrc + " --w_path " + presentSrc);
+            /*    */
+            /* 20 */       BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            /* 21 */       line = "";
+            /* 22 */       while ((line = input.readLine()) != null) {
+                /* 23 */         processList.add(line);
+                /*    */       }
+            /* 25 */       input.close();
+            /*    */     } catch (IOException e) {
+            /* 27 */       e.printStackTrace();
+            /*    */     }
+        /*    */
+        /* 30 */     for (String s : processList)
+            /*    */     {
+
+            /* 33 */       result = result + s;
+            /*    */     }
+
+        /* 35 */     return result;
+        /*    */   }
 /*    */   
 /*    */   public String DataCompression(String originalSrc) {
 /* 39 */     String pythonPath = "/anaconda3/bin/python3.6 ";
