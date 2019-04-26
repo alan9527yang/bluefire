@@ -4,7 +4,8 @@
 /*    */ import com.bluefireplatform.service.OutTrajectoryService;
 /*    */ import java.util.HashMap;
 /*    */ import java.util.Map;
-/*    */ import org.springframework.beans.factory.annotation.Autowired;
+/*    */ import com.bluefireplatform.service.OutdoorTrajectoryForecast;
+import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.stereotype.Controller;
 /*    */ import org.springframework.web.bind.annotation.RequestMapping;
 /*    */ import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,8 @@
 /*    */ {
 /*    */   @Autowired
 /*    */   private OutTrajectoryService outTrajectoryService;
+            @Autowired
+            private OutdoorTrajectoryForecast outdoorTrajectoryForecast;
 /*    */   
 /*    */   @ResponseBody
 /*    */   @RequestMapping({"/queryOutUser.action"})
@@ -41,6 +44,14 @@
 /* 41 */     JSONObject queryString = new JSONObject(map);
 /* 42 */     return this.outTrajectoryService.queryTrajectoryByOutTrajectoryId(queryString);
 /*    */   }
+           @ResponseBody
+           @RequestMapping({"/queryTrajectoryForecastResult.action"})
+           public Object queryTrajectoryForecastResult() throws Exception {
+            Map map = new HashMap();
+            map.put("result_id", Integer.valueOf(1));
+            JSONObject queryString = new JSONObject(map);
+            return this.outdoorTrajectoryForecast.queryForecastResult(queryString);
+  }
 /*    */ }
 
 

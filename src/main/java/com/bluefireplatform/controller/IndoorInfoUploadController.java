@@ -32,7 +32,7 @@
 /*    */   @RequestMapping({"/mapmatching.action"})
 /*    */   public Object mapMatching(MultipartFile jsonFile, HttpServletRequest req) throws Exception {
 /* 34 */     Map map = new HashMap();
-/* 35 */     map.put("trajectory_id", Integer.valueOf(2));
+/* 35 */     map.put("trajectory_id", Integer.valueOf(4));
 /* 36 */     JSONObject queryString = new JSONObject(map);
 /* 37 */     return this.trajectoryInfoManangeService.indoorMapMatching(queryString, req);
 /*    */   }
