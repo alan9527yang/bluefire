@@ -2,6 +2,8 @@ package com.bluefireplatform.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bluefireplatform.entity.OutTrajectory;
+
+
 import javax.servlet.http.HttpServletRequest;
 
 public interface OutTrajectoryService
