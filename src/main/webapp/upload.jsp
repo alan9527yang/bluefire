@@ -23,5 +23,9 @@
     
     <input type="submit" value="查询"/>
 </form>
+<form action="${pageContext.request.contextPath}/queryTrajectoryForecastResult.action" method="post" >
+
+    <input type="submit" value="查询2"/>
+</form>
 </body>
 </html>
