@@ -10,10 +10,7 @@
 /*    */ import org.springframework.web.bind.annotation.RequestMapping;
 /*    */ import org.springframework.web.bind.annotation.ResponseBody;
 /*    */ import org.springframework.web.multipart.MultipartFile;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
+
 /*    */ @Controller
 /*    */ public class IndoorInfoUploadController
 /*    */ {
@@ -32,11 +29,19 @@
 /*    */   @RequestMapping({"/mapmatching.action"})
 /*    */   public Object mapMatching(MultipartFile jsonFile, HttpServletRequest req) throws Exception {
 /* 34 */     Map map = new HashMap();
-/* 35 */     map.put("trajectory_id", Integer.valueOf(4));
+/* 35 */     map.put("trajectory_id", Integer.valueOf(6));
 /* 36 */     JSONObject queryString = new JSONObject(map);
 /* 37 */     return this.trajectoryInfoManangeService.indoorMapMatching(queryString, req);
 /*    */   }
-/*    */ }
+                @ResponseBody
+    /*    */   @RequestMapping({"/compression.action"})
+    /*    */   public Object compression(HttpServletRequest req) throws Exception {
+        /* 34 */     Map map = new HashMap();
+        /* 35 */     map.put("trajectory_id", Integer.valueOf(5));
+        /* 36 */     JSONObject queryString = new JSONObject(map);
+        /* 37 */     return this.trajectoryInfoManangeService.indoorCompression(queryString, req);
+           }
+}
 
 
 /* Location:              C:\develop\BlueFire-Platform\WEB-INF\classes\!\com\bluefireplatform\controller\IndoorInfoUploadController.class

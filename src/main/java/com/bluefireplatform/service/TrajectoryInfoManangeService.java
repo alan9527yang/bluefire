@@ -6,22 +6,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface TrajectoryInfoManangeService
 {
-  Object addIndoorTrajectory(MultipartFile paramMultipartFile, HttpServletRequest paramHttpServletRequest)
+  public Object addIndoorTrajectory(MultipartFile paramMultipartFile, HttpServletRequest paramHttpServletRequest)
     throws Exception;
   
-  Object queryTrajectoryByUserIdAndMapId(JSONObject paramJSONObject);
+  public Object queryTrajectoryByUserIdAndMapId(JSONObject paramJSONObject);
   
-  Object queryTrajectoryByTrajectoryId(JSONObject paramJSONObject)
+  public Object queryTrajectoryByTrajectoryId(JSONObject paramJSONObject)
     throws Exception;
   
-  Object deleteTrajectoryByUserIdAndMapId(JSONObject paramJSONObject);
+  public Object deleteTrajectoryByUserIdAndMapId(JSONObject paramJSONObject);
   
-  Object deleteTrajectoryByTrajectoryId(JSONObject paramJSONObject);
+  public Object deleteTrajectoryByTrajectoryId(JSONObject paramJSONObject);
   
-  Object queryUserByMapId(JSONObject paramJSONObject);
+  public Object queryUserByMapId(JSONObject paramJSONObject);
   
-  Object indoorMapMatching(JSONObject paramJSONObject, HttpServletRequest paramHttpServletRequest)
-    throws Exception;
+  public Object indoorMapMatching(JSONObject paramJSONObject, HttpServletRequest paramHttpServletRequest)throws Exception;
+  public Object indoorCompression(JSONObject queryString,HttpServletRequest req) throws Exception;
 }
 
 

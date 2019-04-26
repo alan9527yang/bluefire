@@ -27,5 +27,9 @@
 
     <input type="submit" value="查询2"/>
 </form>
+<form action="${pageContext.request.contextPath}/compression.action" method="post" >
+
+    <input type="submit" value="轨迹压缩"/>
+</form>
 </body>
 </html>

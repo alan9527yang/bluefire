@@ -5,11 +5,15 @@
 /*    */ import java.util.HashMap;
 /*    */ import java.util.Map;
 /*    */ import com.bluefireplatform.service.OutdoorTrajectoryForecast;
-import org.springframework.beans.factory.annotation.Autowired;
+          import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.stereotype.Controller;
 /*    */ import org.springframework.web.bind.annotation.RequestMapping;
 /*    */ import org.springframework.web.bind.annotation.ResponseBody;
-/*    */ 
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+
+/*    */
 /*    */ 
 /*    */ 
 /*    */ 
@@ -51,8 +55,15 @@ import org.springframework.beans.factory.annotation.Autowired;
             map.put("result_id", Integer.valueOf(1));
             JSONObject queryString = new JSONObject(map);
             return this.outdoorTrajectoryForecast.queryForecastResult(queryString);
-  }
-/*    */ }
+
+            }
+    /*    */   @ResponseBody
+    /*    */   @RequestMapping({"/outdoorMapMatching.action"})
+    /*    */   public Object outdoorMapMatching(JSONObject queryString, HttpServletRequest req) throws Exception {
+        /* 37 */     return this.outTrajectoryService.outdoorMapMatching(queryString, req);
+        /*    */   }
+
+}
 
 
 /* Location:              C:\develop\BlueFire-Platform\WEB-INF\classes\!\com\bluefireplatform\controller\OutdoorController.class

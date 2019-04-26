@@ -34,6 +34,38 @@
 /*    */     }
 /* 35 */     return result;
 /*    */   }
+            public String compression(String originalSrc, String presentSrc)
+                 {
+
+                             String pythonPath = "/anaconda3/bin/python3.6 ";
+                             String filePath = "/Users/yyzmac/Documents/KalmanFilter/dp_get_trace.py ";
+                             String result = "";
+                /* 15 */     Process process = null;
+                /* 16 */     List<String> processList = new java.util.ArrayList();
+                /*    */     String line;
+
+                /* 18 */     try {
+
+                                    process = Runtime.getRuntime().exec(pythonPath + filePath + "--r_path " + originalSrc + " --w_path " + presentSrc);
+                    /*    */
+
+                    /* 20 */       BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    /* 21 */       line = "";
+                    /* 22 */       while ((line = input.readLine()) != null) {
+                        /* 23 */         processList.add(line);
+                        /*    */       }
+                    /* 25 */       input.close();
+                    /*    */     } catch (IOException e) {
+                    /* 27 */       e.printStackTrace();
+                    /*    */     }
+                /*    */
+                /* 30 */     for (String s : processList)
+                    /*    */     {
+                    /* 32 */       System.out.println(s);
+                    /* 33 */       result = result + s;
+                    /*    */     }
+                /* 35 */     return result;
+                /*    */   }
     /*    */   public String outdoorMapMatching(String originalSrc, String presentSrc , int type)
     /*    */   {
 //                     输入你的python环境地址
@@ -76,7 +108,7 @@
         /* 35 */     return result;
         /*    */   }
 /*    */   
-/*    */   public String DataCompression(String originalSrc) {
+/*    */   public String dataCompression(String originalSrc) {
 /* 39 */     String pythonPath = "/anaconda3/bin/python3.6 ";
 /* 40 */     String filePath = "/Users/yyzmac/Documents/map-matching/test.py ";
 /* 41 */     String presentSrc = "";
