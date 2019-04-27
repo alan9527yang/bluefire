@@ -1,11 +1,13 @@
 /*    */ package com.bluefireplatform.controller;
 /*    */ 
 /*    */ import com.alibaba.fastjson.JSONObject;
-/*    */ import com.bluefireplatform.service.OutTrajectoryService;
+/*    */ import com.bluefireplatform.service.HeatMapService;
+import com.bluefireplatform.service.OutTrajectoryService;
 /*    */ import java.util.HashMap;
 /*    */ import java.util.Map;
 /*    */ import com.bluefireplatform.service.OutdoorTrajectoryForecast;
-          import org.springframework.beans.factory.annotation.Autowired;
+import com.bluefireplatform.service.UserSimilarityService;
+import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.stereotype.Controller;
 /*    */ import org.springframework.web.bind.annotation.RequestMapping;
 /*    */ import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,10 @@ import javax.servlet.http.HttpServletRequest;
 /*    */   private OutTrajectoryService outTrajectoryService;
             @Autowired
             private OutdoorTrajectoryForecast outdoorTrajectoryForecast;
+            @Autowired
+            private HeatMapService heatMapService;
+            @Autowired
+            private UserSimilarityService userSimilarityService;
 /*    */   
 /*    */   @ResponseBody
 /*    */   @RequestMapping({"/queryOutUser.action"})
@@ -62,7 +68,24 @@ import javax.servlet.http.HttpServletRequest;
     /*    */   public Object outdoorMapMatching(JSONObject queryString, HttpServletRequest req) throws Exception {
         /* 37 */     return this.outTrajectoryService.outdoorMapMatching(queryString, req);
         /*    */   }
-
+    /*    */   @ResponseBody
+    /*    */   @RequestMapping({"/heatMap.action"})
+    /*    */   public Object heatMap() throws Exception {
+                      Map map= new HashMap();
+                      map.put("startDate","2008-07-04");
+                        map.put("endDate","2009-09-04");
+                        JSONObject queryString = new JSONObject(map);
+        /* 37 */     return this.heatMapService.queryAllOutdoorTrajectoryDetails(queryString);
+        /*    */   }
+    @ResponseBody
+    /*    */   @RequestMapping({"/userSimilarity.action"})
+    /*    */   public Object userSimilarity(HttpServletRequest req) throws Exception {
+        Map map= new HashMap();
+        map.put("userAID","0");
+        map.put("userBID","1");
+        JSONObject queryString = new JSONObject(map);
+        /* 37 */     return this.userSimilarityService.userSimilarity(queryString ,req);
+        /*    */   }
 }
 
 

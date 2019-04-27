@@ -31,5 +31,14 @@
 
     <input type="submit" value="轨迹压缩"/>
 </form>
+<form action="${pageContext.request.contextPath}/heatMap.action" method="post" >
+
+    <input type="submit" value="热力图"/>
+</form>
+<form action="${pageContext.request.contextPath}/userSimilarity.action" method="post" >
+
+    <input type="submit" value="用户相似度"/>
+</form>
+
 </body>
 </html>

@@ -114,6 +114,10 @@
         /* 116 */     map.put("outUserIdList", outUserIdList);
         /* 117 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
         /*     */   }
+
+
+
+
     ///*     */   室外地图匹配
     /*     */   public Object outdoorMapMatching(JSONObject queryString, HttpServletRequest req)
     /*     */     throws Exception
