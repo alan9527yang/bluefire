@@ -163,7 +163,11 @@
 /*    */     }
 /* 63 */     return presentSrc;
 /*    */   }
-/*    */ }
+
+    public String empiricalandIntegererest(String r_path, String w_path) {
+            return "OK";
+    }
+    /*    */ }
 
 
 /* Location:              C:\develop\BlueFire-Platform\WEB-INF\classes\!\com\bluefireplatfor\\util\JythonUtil.class

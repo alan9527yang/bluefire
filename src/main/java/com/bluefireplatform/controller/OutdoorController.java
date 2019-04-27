@@ -1,12 +1,10 @@
 /*    */ package com.bluefireplatform.controller;
 /*    */ 
 /*    */ import com.alibaba.fastjson.JSONObject;
-/*    */ import com.bluefireplatform.service.HeatMapService;
-import com.bluefireplatform.service.OutTrajectoryService;
+/*    */ import com.bluefireplatform.service.*;
 /*    */ import java.util.HashMap;
 /*    */ import java.util.Map;
-/*    */ import com.bluefireplatform.service.OutdoorTrajectoryForecast;
-import com.bluefireplatform.service.UserSimilarityService;
+/*    */
 import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.stereotype.Controller;
 /*    */ import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
             private HeatMapService heatMapService;
             @Autowired
             private UserSimilarityService userSimilarityService;
+            @Autowired
+            private EmpiricalandIntegererestService empiricalandIntegererestService;
 /*    */   
 /*    */   @ResponseBody
 /*    */   @RequestMapping({"/queryOutUser.action"})
@@ -77,14 +77,21 @@ import javax.servlet.http.HttpServletRequest;
                         JSONObject queryString = new JSONObject(map);
         /* 37 */     return this.heatMapService.queryAllOutdoorTrajectoryDetails(queryString);
         /*    */   }
-    @ResponseBody
+                @ResponseBody
     /*    */   @RequestMapping({"/userSimilarity.action"})
     /*    */   public Object userSimilarity(HttpServletRequest req) throws Exception {
-        Map map= new HashMap();
-        map.put("userAID","0");
-        map.put("userBID","1");
-        JSONObject queryString = new JSONObject(map);
+                        Map map= new HashMap();
+                        map.put("userAID","0");
+                        map.put("userBID","1");
+                        JSONObject queryString = new JSONObject(map);
         /* 37 */     return this.userSimilarityService.userSimilarity(queryString ,req);
+        /*    */   }
+                @ResponseBody
+    /*    */   @RequestMapping({"/interest.action"})
+    /*    */   public Object EmpiricalandIntegererestTest(HttpServletRequest req) throws Exception {
+
+
+        /* 37 */     return this.empiricalandIntegererestService.getAllEmpiricalandIntegererestService(req);
         /*    */   }
 }
 
