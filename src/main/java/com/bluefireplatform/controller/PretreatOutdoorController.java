@@ -1,25 +1,20 @@
 /*    */ package com.bluefireplatform.controller;
-/*    */ 
-/*    */ import com.alibaba.fastjson.JSONObject;
-/*    */ import com.bluefireplatform.service.*;
-/*    */ import java.util.HashMap;
-/*    */ import java.util.Map;
-/*    */
-         import org.springframework.beans.factory.annotation.Autowired;
-/*    */ import org.springframework.stereotype.Controller;
-/*    */ import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.bluefireplatform.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-/*    */ import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
-/*    */
-/*    */ 
-/*    */ 
 /*    */ @CrossOrigin
 /*    */ @Controller("/Integererface/data_manage")
-/*    */ public class OutdoorController
+/*    */ public class PretreatOutdoorController
 /*    */ {
 /*    */   @Autowired
 /*    */   private OutTrajectoryService outTrajectoryService;
@@ -31,26 +26,6 @@ import javax.servlet.http.HttpServletRequest;
             private UserSimilarityService userSimilarityService;
             @Autowired
             private EmpiricalandIntegererestService empiricalandIntegererestService;
-/*    */   
-/*    */   @ResponseBody
-/*    */   @RequestMapping("/getOutdoorUsers")
-/*    */   public Object queryOutUser()
-/*    */   {
-/* 25 */     return this.outTrajectoryService.queryAllOutUser();
-/*    */   }
-/*    */   
-/*    */   @ResponseBody
-/*    */   @RequestMapping({"/getOutdoorTrajectories"})
-/*    */   public Object queryOutdoorTrajectoryByUserId(@RequestBody JSONObject queryString) {
-
-/* 34 */     return this.outTrajectoryService.queryTrajectoryByOutUserId(queryString);
-/*    */   }
-/*    */   
-/*    */   @ResponseBody
-/*    */   @RequestMapping({"/getOutdoorTrajectoryDetail"})
-/* 39 */   public Object queryOutdoorTrajectoryByTrajectoryId(@RequestBody JSONObject queryString) throws Exception {
-/* 42 */     return this.outTrajectoryService.queryTrajectoryByOutTrajectoryId(queryString);
-/*    */   }
 
            @ResponseBody
            @RequestMapping({"/queryTrajectoryForecastResult.action"})
@@ -62,7 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 
             }
     /*    */   @ResponseBody
-    /*    */   @RequestMapping({"/outdoorMapMatching.action"})
+    /*    */   @RequestMapping({"/correctOutdoorTrajectory"})
     /*    */   public Object outdoorMapMatching(JSONObject queryString, HttpServletRequest req) throws Exception {
         /* 37 */     return this.outTrajectoryService.outdoorMapMatching(queryString, req);
         /*    */   }

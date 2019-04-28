@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bluefireplatform.component.ReturnHelper;
 import com.bluefireplatform.entity.TrajectoryForecast;
 import com.bluefireplatform.mapper.TrajectoryForecastMapper;
-import com.bluefireplatform.service.OutdoorTrajectoryForecast;
+import com.bluefireplatform.service.OutdoorTrajectoryForecastService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 @Service
-public class OutdoorTrajectoryForecastImpl implements OutdoorTrajectoryForecast
+public class OutdoorTrajectoryForecastServiceImpl implements OutdoorTrajectoryForecastService
 {
 
     @Autowired
@@ -30,7 +30,7 @@ public class OutdoorTrajectoryForecastImpl implements OutdoorTrajectoryForecast
     public Object queryForecastResult(JSONObject queryString) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Integer resultId = queryString.getInteger("result_id");
+        Integer resultId = queryString.getInteger("resultId");
         TrajectoryForecast trajectoryForecast = trajectoryForecastMapper.selectByPrimaryKey(resultId);
 
         String resultSrc = trajectoryForecast.getResultSrc();
@@ -38,7 +38,7 @@ public class OutdoorTrajectoryForecastImpl implements OutdoorTrajectoryForecast
         List data = (ArrayList)value.get("data");
 
         Map<String,Object> map= new HashMap<String, Object>();
-        map.put("resultList",data);
-        return returnHelper.returnNau(map,100,"服务器正常");
+        map.put("list",data);
+        return returnHelper.returnNau(map,1000,"服务器正常");
     }
 }

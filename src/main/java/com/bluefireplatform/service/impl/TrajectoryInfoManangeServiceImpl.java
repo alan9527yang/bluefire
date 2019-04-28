@@ -80,8 +80,8 @@
             @Override
 /*     */   public Object queryTrajectoryByUserIdAndMapId(JSONObject queryString)
 /*     */   {
-/*  99 */     Integer userId = queryString.getInteger("user_id");
-/* 100 */     Integer mapId = queryString.getInteger("map_id");
+/*  99 */     Integer userId = queryString.getInteger("userId");
+/* 100 */     Integer mapId = queryString.getInteger("mapId");
 /*     */
 /* 102 */     TrajectoryExample trajectoryExample = new TrajectoryExample();
 /* 103 */     TrajectoryExample.Criteria criteria = trajectoryExample.createCriteria();
@@ -90,7 +90,7 @@
 /*     */     }
 /* 107 */     List<Trajectory> list = this.trajectoryMapper.selectByExample(trajectoryExample);
 /* 108 */     Map<String, Object> map = new HashMap();
-/* 109 */     map.put("trajectoryList", list);
+/* 109 */     map.put("list", list);
 /*     */
 /* 111 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
 /*     */   }
@@ -98,7 +98,7 @@
 /*     */   public Object queryTrajectoryByTrajectoryId(JSONObject queryString)
 /*     */     throws Exception
 /*     */   {
-/* 117 */     Integer trajectoryId = queryString.getInteger("trajectory_id");
+/* 117 */     Integer trajectoryId = queryString.getInteger("trajectoryId");
 /*     */     
 /* 119 */     TrajectoryExample trajectoryExample = new TrajectoryExample();
 /* 120 */     TrajectoryExample.Criteria criteria = trajectoryExample.createCriteria();
@@ -113,7 +113,7 @@
 /* 129 */     List data = (ArrayList)value.get("data");
 /*     */     
 /* 131 */     Map<String, Object> map = new HashMap();
-/* 132 */     map.put("trajectoryPointList", data);
+/* 132 */     map.put("list", data);
 /* 133 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
 /*     */   }
 /*     */   
@@ -142,12 +142,12 @@
 /*     */   }
 /*     */   
 /*     */ 
-/*     */   public Object queryUserByMapId(JSONObject queryStyring)
+/*     */   public Object queryUserByMapId(JSONObject queryString)
 /*     */   {
 /* 163 */     List userIdList = new ArrayList();
 /* 164 */     List userList = new ArrayList();
 /*     */     
-/* 166 */     Integer mapId = queryStyring.getInteger("map_id");
+/* 166 */     Integer mapId = queryString.getInteger("mapId");
 /* 167 */     TrajectoryExample trajectoryExample = new TrajectoryExample();
 /* 168 */     TrajectoryExample.Criteria criteria = trajectoryExample.createCriteria();
 /* 169 */     criteria.andMapIdEqualTo(mapId);
@@ -163,7 +163,7 @@
 /* 179 */       userList.add(user);
 /*     */     }
 /* 181 */     Map<String, Object> map = new HashMap();
-/* 182 */     map.put("userList", userList);
+/* 182 */     map.put("list", userList);
 /*     */     
 /* 184 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
 /*     */   }
@@ -173,7 +173,7 @@
 /* 189 */     ObjectMapper mapper = new ObjectMapper();
 /* 190 */     List data = new ArrayList();
 
-/* 193 */     Integer originalId = queryString.getInteger("trajectory_id");
+/* 193 */     Integer originalId = queryString.getInteger("trajectoryId");
 /* 194 */     IndoorMiddleTabExample example = new IndoorMiddleTabExample();
 /* 203 */     IndoorMiddleTabExample.Criteria criteria = example.createCriteria();
 /* 204 */     criteria.andOriginalIdEqualTo(originalId).andPresentTypeEqualTo(1);
@@ -235,7 +235,7 @@
 /*     */     
 /*     */ 
 /* 262 */     Map<String, Object> map = new HashMap();
-/* 263 */     map.put("trajectoryPointList", data);
+/* 263 */     map.put("list", data);
 /*     */     
 /* 265 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
 /*     */   }
@@ -245,7 +245,7 @@
 
                       ObjectMapper mapper = new ObjectMapper();
         /* 190 */     List data = new ArrayList();
-        /* 193 */     Integer originalId = queryString.getInteger("trajectory_id");
+        /* 193 */     Integer originalId = queryString.getInteger("trajectoryId");
         /* 194 */     IndoorMiddleTabExample example = new IndoorMiddleTabExample();
         /* 203 */     IndoorMiddleTabExample.Criteria criteria = example.createCriteria();
         /* 204 */     criteria.andOriginalIdEqualTo(originalId).andPresentTypeEqualTo(2);
@@ -262,7 +262,6 @@
             /* 214 */       String result = jythonUtil.compression(originalSrc, presentSrc);
 
             /* 219 */       if (result.contains("OK")) {
-                                System.out.println("11111111111111111111");
                 /* 221 */         IndoorCompression presentTrajectory = new IndoorCompression();
                 /* 222 */         presentTrajectory.setUserId(trajectory.getUserId());
                 /* 223 */         presentTrajectory.setMapId(trajectory.getMapId());
@@ -286,7 +285,7 @@
         /*     */     else
             /*     */     {
             /* 244 */       for (IndoorMiddleTab middle : middleList) {
-                /* 245 */         if (middle.getPresentType().intValue() == 1)
+                /* 245 */         if (middle.getPresentType().intValue() == 2)
                     /*     */         {
                     /* 247 */           int presentId = middle.getPresentId().intValue();
                     /*     */
@@ -304,7 +303,7 @@
         /*     */
         /*     */
         /* 262 */     Map<String, Object> map = new HashMap();
-        /* 263 */     map.put("trajectoryPointList", data);
+        /* 263 */     map.put("list", data);
         /*     */
         /* 265 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
     }

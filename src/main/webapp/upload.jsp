@@ -43,5 +43,9 @@
 
     <input type="submit" value="兴趣度与经验值"/>
 </form>
+<form action="${pageContext.request.contextPath}/queryIndoorMap" method="post">
+    <input type="submit" value="查询所有室内地图">
+
+</form>
 </body>
 </html>

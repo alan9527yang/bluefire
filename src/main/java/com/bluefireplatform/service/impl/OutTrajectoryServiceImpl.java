@@ -2,15 +2,15 @@
 /*     */
 /*     */ import com.alibaba.fastjson.JSONObject;
 /*     */ import com.bluefireplatform.component.ReturnHelper;
-/*     */ import com.bluefireplatform.entity.OutTrajectory;
-/*     */ import com.bluefireplatform.entity.OutTrajectoryExample;
-/*     */ import com.bluefireplatform.entity.OutdoorMapmatching;
-/*     */ import com.bluefireplatform.entity.OutdoorMiddleTab;
-/*     */ import com.bluefireplatform.entity.OutdoorMiddleTabExample;
-/*     */ import com.bluefireplatform.mapper.OutTrajectoryMapper;
-/*     */ import com.bluefireplatform.mapper.OutdoorCompressionMapper;
-/*     */ import com.bluefireplatform.mapper.OutdoorMapmatchingMapper;
-/*     */ import com.bluefireplatform.mapper.OutdoorMiddleTabMapper;
+/*     */ import com.bluefireplatform.entity.*;
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */ import com.bluefireplatform.mapper.*;
+/*     */
+/*     */
+/*     */
 /*     */ import com.bluefireplatform.service.OutTrajectoryService;
 /*     */ import com.bluefireplatform.util.JythonUtil;
 /*     */ import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,6 +40,8 @@
     /*     */   private OutdoorMapmatchingMapper outdoorMapmatchingMapper;
     /*     */   @Autowired
     /*     */   private OutdoorCompressionMapper outdoorCompressionMapper;
+                @Autowired
+                private UserMapper userMapper;
     /*     */
     /*     */   public Object insertTrajectory(OutTrajectory outTrajectory)
     /*     */   {
@@ -51,8 +53,7 @@
     /*     */
     /*     */   public Object queryTrajectoryByOutUserId(JSONObject queryString)
     /*     */   {
-        /*  56 */     Integer outUserId = queryString.getInteger("out_user_id");
-        /*  57 */     System.out.println(outUserId);
+        /*  56 */     Integer outUserId = queryString.getInteger("userId");
         /*     */
         /*  59 */     OutTrajectoryExample example = new OutTrajectoryExample();
         /*  60 */     OutTrajectoryExample.Criteria criteria = example.createCriteria();
@@ -61,7 +62,7 @@
             /*     */     }
         /*  64 */     List<OutTrajectory> list = this.outTrajectoryMapper.selectByExample(example);
         /*  65 */     Map<String, Object> map = new HashMap();
-        /*  66 */     map.put("trajectoryList", list);
+        /*  66 */     map.put("list", list);
         /*     */
         /*  68 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
         /*     */   }
@@ -69,7 +70,7 @@
     /*     */   public Object queryTrajectoryByOutTrajectoryId(JSONObject queryString)
     /*     */     throws Exception
     /*     */   {
-        /*  74 */     Integer outTrajectoryId = queryString.getInteger("out_trajectory_id");
+        /*  74 */     Integer outTrajectoryId = queryString.getInteger("trajectoryId");
         /*     */
         /*     */
         /*  77 */     OutTrajectoryExample example = new OutTrajectoryExample();
@@ -85,7 +86,7 @@
         /*  87 */     List data = (ArrayList)value.get("data");
         /*     */
         /*  89 */     Map<String, Object> map = new HashMap();
-        /*  90 */     map.put("trajectoryPointList", data);
+        /*  90 */     map.put("list", data);
         /*  91 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
         /*     */   }
     /*     */
@@ -105,13 +106,18 @@
     /*     */   {
         /* 108 */     List<OutTrajectory> trajectories = this.outTrajectoryMapper.selectByExample(null);
         /* 109 */     List<Integer> outUserIdList = new ArrayList();
+                      List userList = new ArrayList();
         /* 110 */     for (OutTrajectory outTrajectory : trajectories) {
             /* 111 */       Integer outUserId = outTrajectory.getUserId();
             /* 112 */       if (!outUserIdList.contains(outUserId))
                 /* 113 */         outUserIdList.add(outUserId);
             /*     */     }
+                        for (Object userId : outUserIdList) {
+            /* 178 */       User user = this.userMapper.selectByPrimaryKey((Integer)userId);
+            /* 179 */       userList.add(user);
+            /*     */     }
         /* 115 */     Map map = new HashMap();
-        /* 116 */     map.put("outUserIdList", outUserIdList);
+        /* 116 */     map.put("list", userList);
         /* 117 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
         /*     */   }
 
@@ -128,9 +134,9 @@
         /* 124 */     List data = new ArrayList();
         /*     */
 ///*     */     获得室外轨迹轨迹id
-        /* 127 */     Integer originalId = queryString.getInteger("out_trajectory_id");
+        /* 127 */     Integer originalId = queryString.getInteger("trajectoryId");
 //                获得地图匹配算法类型:
-        Integer presentType = queryString.getInteger("present_type");
+        Integer presentType = queryString.getInteger("trajectoryType");
 
 //                建立室外轨迹中间表的查询载体
         /* 128 */     OutdoorMiddleTabExample example = new OutdoorMiddleTabExample();
@@ -216,7 +222,7 @@
         /*     */
 ///*     */       把轨迹详细信息封装到map里，用来向前台返回
         /* 193 */     Map<String, Object> map = new HashMap();
-        /* 194 */     map.put("trajectoryPointList", data);
+        /* 194 */     map.put("list", data);
         /* 196 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
         /*     */   }
     /*     */ }

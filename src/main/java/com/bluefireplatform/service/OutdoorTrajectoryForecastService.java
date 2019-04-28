@@ -4,6 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
 
-public interface OutdoorTrajectoryForecast {
+public interface OutdoorTrajectoryForecastService {
     public Object queryForecastResult(JSONObject queryString) throws IOException, Exception;
 }

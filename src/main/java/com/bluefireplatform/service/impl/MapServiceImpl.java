@@ -33,7 +33,7 @@
 /*    */   {
 /* 34 */     List mapList = this.mapMapper.selectByExample(null);
 /* 35 */     java.util.Map map = new HashMap();
-/* 36 */     map.put("mapList", mapList);
+/* 36 */     map.put("list", mapList);
 /*    */     
 /* 38 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
 /*    */   }
