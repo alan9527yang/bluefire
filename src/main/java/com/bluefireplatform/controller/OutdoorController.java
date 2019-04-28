@@ -87,7 +87,7 @@ import javax.servlet.http.HttpServletRequest;
         /* 37 */     return this.userSimilarityService.userSimilarity(queryString ,req);
         /*    */   }
                 @ResponseBody
-    /*    */   @RequestMapping({"/interest.action"})
+    /*    */   @RequestMapping({"/interest"})
     /*    */   public Object EmpiricalandIntegererestTest(HttpServletRequest req) throws Exception {
 
 
