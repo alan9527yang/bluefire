@@ -169,66 +169,59 @@
             /*     */
             /*     */
 ///*     */       地图匹配算法完成后,会向控制台传一个"OK"字符串，如果结果中包含这个字符串，说明算法运行成功
-            /* 153 */       if (result.contains("OK")) {
-///* 154 */         创建地图匹配后的轨迹实例，用来做数据库的插入操作
-                /* 155 */         OutdoorMapmatching presentTrajectory = new OutdoorMapmatching();
+                   if (result.contains("OK")) {
+//          创建地图匹配后的轨迹实例，用来做数据库的插入操作
+                        OutdoorMapmatching presentTrajectory = new OutdoorMapmatching();
 //                    设置新实例的用户id
-                /* 156 */         presentTrajectory.setUserId(outTrajectory.getUserId());
+                        presentTrajectory.setUserId(outTrajectory.getUserId());
                         presentTrajectory.setStartTime(outTrajectory.getStartTime());
                         presentTrajectory.setEndTime(outTrajectory.getEndTime());
 //                    设置地图匹配算法的类型：1，2，3分别代表地图匹配算法1，2，3
-                /* 157 */         presentTrajectory.setTrajectoryType(presentType);
+                        presentTrajectory.setTrajectoryType(presentType);
 //                    设置新的文件地址
-                /* 158 */         presentTrajectory.setTrajectorySrc(presentSrc);
+                        presentTrajectory.setTrajectorySrc(presentSrc);
 //                    在outdoor_mapmatching表中插入这个新实例，就可以对表进行更新了，同时返回新记录的id
-                /* 159 */         int presentId = this.outdoorMapmatchingMapper.insert(presentTrajectory);
-                /*     */
+                      int presentId = this.outdoorMapmatchingMapper.insert(presentTrajectory);
 //                    拿到新纪录的id后，创建中间表的实例，更新中间表的记录
-                /* 161 */         OutdoorMiddleTab outdoorMiddleTab = new OutdoorMiddleTab();
+                       OutdoorMiddleTab outdoorMiddleTab = new OutdoorMiddleTab();
 //                    设置原始轨迹的id
-                /* 162 */         outdoorMiddleTab.setOriginalId(originalId);
+                       outdoorMiddleTab.setOriginalId(originalId);
 //                    设置新纪录的id
-                /* 163 */         outdoorMiddleTab.setPresentId(Integer.valueOf(presentId));
+                        outdoorMiddleTab.setPresentId(Integer.valueOf(presentId));
 //                    设置地图匹配算法的类型
-                /* 164 */         outdoorMiddleTab.setPresentType(presentType);
+                        outdoorMiddleTab.setPresentType(presentType);
 //                    插入新实例，更新中间表
-                /* 165 */         this.outdoorMiddleTabMapper.insertSelective(outdoorMiddleTab);
-                /*     */
-///*     */             从新地址中读取地图匹配后的轨迹数据的信息
-                /* 168 */         Map<String, Object> value = (Map)mapper.readValue(new File(presentSrc), Map.class);
-                /* 169 */         data = (ArrayList)value.get("data");
-                /*     */       }
-            /*     */
-            /*     */     }
+                this.outdoorMiddleTabMapper.insertSelective(outdoorMiddleTab);
+
+//            从新地址中读取地图匹配后的轨迹数据的信息
+                        Map<String, Object> value = (Map)mapper.readValue(new File(presentSrc), Map.class);
+                         data = (ArrayList)value.get("data");
+                       }
+                 }
 //                查询结果不为空，说明中间表存有地图匹配后的记录，直接从中间表中读取地图匹配后的轨迹id，根据这个轨迹id查询outdoor_mapmatching表
-        /*     */     else
-            /*     */     {
-            /* 175 */       for (OutdoorMiddleTab middle : middleList) {
-                /* 176 */
-///*     */           获得地图匹配后的轨迹id
-                /* 178 */           int presentId = middle.getPresentId().intValue();
-///*     */           根据轨迹id查询这条轨迹的详细信息
-                /* 180 */           OutdoorMapmatching presentTrajectory = this.outdoorMapmatchingMapper.selectByPrimaryKey(Integer.valueOf(presentId));
-                /*     */
-///*     */           用详细信息中的地址新建file实例，用来读取文件的详细内容
-                /* 183 */           File newfile = new File(presentTrajectory.getTrajectorySrc());
-                /*     */
+            else
+                {
+                  for (OutdoorMiddleTab middle : middleList) {
+
+//           获得地图匹配后的轨迹id
+                          int presentId = middle.getPresentId().intValue();
+//           根据轨迹id查询这条轨迹的详细信息
+                          OutdoorMapmatching presentTrajectory = this.outdoorMapmatchingMapper.selectByPrimaryKey(Integer.valueOf(presentId));
+
+//           用详细信息中的地址新建file实例，用来读取文件的详细内容
+                           File newfile = new File(presentTrajectory.getTrajectorySrc());
+
 //                        读取文件的详细内容，即轨迹详情
-                /* 185 */           Map<String, Object> value = (Map)mapper.readValue(newfile, Map.class);
-                /* 187 */           data = (ArrayList)value.get("data");
-                /*     */
-                /*     */       }
-            /*     */     }
-        /*     */
-///*     */       把轨迹详细信息封装到map里，用来向前台返回
-        /* 193 */     Map<String, Object> map = new HashMap();
-        /* 194 */     map.put("list", data);
-        /* 196 */     return this.returnHelper.returnNau(map, 1000, "服务器正常");
-        /*     */   }
-    /*     */ }
+                           Map<String, Object> value = (Map)mapper.readValue(newfile, Map.class);
+                           data = (ArrayList)value.get("data");
 
+                       }
+                 }
 
-/* Location:              C:\develop\BlueFire-Platform\WEB-INF\classes\!\com\bluefireplatform\service\impl\OutTrajectoryServiceImpl.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+//       把轨迹详细信息封装到map里，用来向前台返回
+             Map<String, Object> map = new HashMap();
+             map.put("list", data);
+             return this.returnHelper.returnNau(map, 1000, "服务器正常");
+           }
+    }
+

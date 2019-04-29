@@ -13,31 +13,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-/*    */ @CrossOrigin
-/*    */ @Controller("/Integererface/dataVisualization")
-/*    */ public class DataVisualizationController
-/*    */ {
-/*    */   @Autowired
-/*    */   private OutTrajectoryService outTrajectoryService;
-            @Autowired
-            private OutdoorTrajectoryForecastService outdoorTrajectoryForecastService;
-            @Autowired
-            private HeatMapService heatMapService;
-            @Autowired
-            private UserSimilarityService userSimilarityService;
-            @Autowired
-            private EmpiricalandIntegererestService empiricalandIntegererestService;
+     @CrossOrigin
+     @Controller
+     @RequestMapping("/Integererface/dataVisualization")
+     public class DataVisualizationController
+     {
+        @Autowired
+        private OutTrajectoryService outTrajectoryService;
+        @Autowired
+        private OutdoorTrajectoryForecastService outdoorTrajectoryForecastService;
+        @Autowired
+        private HeatMapService heatMapService;
+        @Autowired
+        private UserSimilarityService userSimilarityService;
+        @Autowired
+        private EmpiricalandIntegererestService empiricalandIntegererestService;
 
-
-    /*    */   @ResponseBody
-    /*    */   @RequestMapping({"/getAllOutdoorTrajectoryDetails"})
-    /*    */   public Object heatMap(@RequestBody JSONObject queryString) throws Exception {
-        /* 37 */     return this.heatMapService.queryAllOutdoorTrajectoryDetails(queryString);
-        /*    */   }
-}
-
-
-/* Location:              C:\develop\BlueFire-Platform\WEB-INF\classes\!\com\bluefireplatform\controller\OutdoorController.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
+        @ResponseBody
+        @RequestMapping({"/getAllOutdoorTrajectoryDetails"})
+        public Object heatMap(@RequestBody JSONObject queryString) throws Exception {
+            return this.heatMapService.queryAllOutdoorTrajectoryDetails(queryString);
+        }
+    }

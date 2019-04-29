@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 /*    */ 
 /*    */ 
 /*    */ @CrossOrigin
-/*    */ @Controller("/Integererface/data_manage")
+/*    */ @Controller
+         @RequestMapping("/Integererface/data_manage")
 /*    */ public class OutdoorController
 /*    */ {
 /*    */   @Autowired

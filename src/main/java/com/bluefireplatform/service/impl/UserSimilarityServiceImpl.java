@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,15 +35,19 @@ public class UserSimilarityServiceImpl implements UserSimilarityService {
     public Object userSimilarity(JSONObject queryString , HttpServletRequest req) throws Exception {
         Integer userAId= queryString.getInteger("userAID") ;
         Integer userBId= queryString.getInteger("userBID") ;
+        String startDate= queryString.getString("startDate") + " 00:00:00";
+        String endDate = queryString.getString("endDate") + " 23:59:59";
+        long startTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(startDate, new ParsePosition(0)).getTime()/ 1000;
+        long endTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(endDate, new ParsePosition(0)).getTime()/ 1000;
         List outTrajectoriesAJson = new ArrayList();
         List outTrajectoriesBJson = new ArrayList();
         OutTrajectoryExample example = new OutTrajectoryExample();
         OutTrajectoryExample.Criteria criteria = example.createCriteria();
 
-        criteria.andUserIdEqualTo(userAId);
+        criteria.andUserIdEqualTo(userAId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
         List<OutTrajectory> outTrajectoriesA = outTrajectoryMapper.selectByExample(example);
         example.clear();
-        criteria.andUserIdEqualTo(userBId);
+        criteria.andUserIdEqualTo(userBId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
         List<OutTrajectory> outTrajectoriesB = outTrajectoryMapper.selectByExample(example);
 
         for (OutTrajectory outTrajectory:outTrajectoriesA) {

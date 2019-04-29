@@ -14,7 +14,8 @@
 /*    */ import org.springframework.web.bind.annotation.ResponseBody;
 /*    */ import org.springframework.web.multipart.MultipartFile;
          @CrossOrigin
-/*    */ @Controller("/Integererface/data_manage")
+/*    */ @Controller
+         @RequestMapping("/Integererface/data_manage")
 /*    */ public class IndoorInfoUploadController
 /*    */ {
 /*    */   @Autowired

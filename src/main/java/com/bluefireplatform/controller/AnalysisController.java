@@ -14,7 +14,8 @@ import java.util.Map;
 
 
 /*    */ @CrossOrigin
-/*    */ @Controller("/Integererface/analysis")
+/*    */ @Controller
+         @RequestMapping("/Integererface/analysis")
 /*    */ public class AnalysisController
 /*    */ {
 /*    */   @Autowired

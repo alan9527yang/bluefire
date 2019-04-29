@@ -58,8 +58,8 @@
 /*  75 */     ObjectMapper mapper = new ObjectMapper();
 /*  76 */     Map<String, Object> value = (Map)mapper.readValue(file, Map.class);
 /*  77 */     List data = (ArrayList)value.get("data");
-/*  78 */     String startTime = (String)((HashMap)data.get(0)).get("time");
-/*  79 */     String endTime = (String)((HashMap)data.get(data.size() - 1)).get("time");
+/*  78 */     Long startTime = (Long)((HashMap)data.get(0)).get("timeStamp");
+/*  79 */     Long endTime = (Long)((HashMap)data.get(data.size() - 1)).get("timeStamp");
 /*  80 */     int userId = Integer.parseInt((String)value.get("userId"));
 /*  81 */     int mapId = Integer.parseInt((String)value.get("mapId"));
 /*  82 */     String trajectorySrc = file.getAbsolutePath();

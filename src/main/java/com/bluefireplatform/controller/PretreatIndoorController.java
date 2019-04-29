@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 
 
          @CrossOrigin
-/*    */ @Controller("/Integererface/pretreatment")
+/*    */ @Controller
+         @RequestMapping("/Integererface/pretreatment")
 /*    */ public class PretreatIndoorController
 /*    */ {
 /*    */   @Autowired

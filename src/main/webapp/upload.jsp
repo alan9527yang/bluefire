@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 <script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"50131",secure:"50132"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
 <body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-4" data-genuitec-path="/BlueFire-Platform/WebRoot/upload.jsp">
-<form action="${pageContext.request.contextPath}/upload.action" method="post" enctype="multipart/form-data" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-4" data-genuitec-path="/BlueFire-Platform/WebRoot/upload.jsp">
+<form action="${pageContext.request.contextPath}/Integererface/data_manage/upload.action" method="post" enctype="multipart/form-data" data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-4" data-genuitec-path="/BlueFire-Platform/WebRoot/upload.jsp">
     文件：<input type="file" name="jsonFile"/><br>
     <input type="submit" value="上传"/>
 </form>
-<form action="${pageContext.request.contextPath}/mapmatching.action" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/Integererface/data_manage/mapmatching.action" method="post" enctype="multipart/form-data">
     
     <input type="submit" value="地图匹配"/>
 </form>

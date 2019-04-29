@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*    */ @CrossOrigin
-/*    */ @Controller("/Integererface/data_manage")
+/*    */ @Controller
+         @RequestMapping("/Integererface/pretreatment")
 /*    */ public class PretreatOutdoorController
 /*    */ {
 /*    */   @Autowired

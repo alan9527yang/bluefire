@@ -45,7 +45,7 @@ public class EmpiricalandIntegererestServiceImpl implements EmpiricalandIntegere
             data.add(JSONObject.toJSON(trajectory));
         }
         Map jythonMap = new HashMap<>();
-        jythonMap.put("trajectoryList",data);
+        jythonMap.put("list",data);
         JSONObject json = new JSONObject(jythonMap);
         String r_path = req.getServletContext().getRealPath("/EmpiricalandIntegererest") + "/EmpiricalandIntegererestServiceRead.json";
         File r_file = new File(r_path);
@@ -79,7 +79,7 @@ public class EmpiricalandIntegererestServiceImpl implements EmpiricalandIntegere
             data.add(JSONObject.toJSON(trajectory));
         }
         Map jythonMap = new HashMap<>();
-        jythonMap.put("trajectoryList",data);
+        jythonMap.put("list",data);
         JSONObject json = new JSONObject(jythonMap);
         String r_path = req.getServletContext().getRealPath("/EmpiricalandIntegererest") + "/EmpiricalandIntegererestServiceRead.json";
         File r_file = new File(r_path);
