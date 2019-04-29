@@ -24,6 +24,15 @@
   	<filter-name>CharacterEncodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
+	<filter>
+		<description>跨域</description>
+		<filter-name>crossFilter</filter-name>
+		<filter-class>com.bluefireplatform.filter.crossFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>crossFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
   <servlet>
   	<servlet-name>springmvc</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -37,6 +46,7 @@
   	<servlet-name>springmvc</servlet-name>
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
+
   <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
