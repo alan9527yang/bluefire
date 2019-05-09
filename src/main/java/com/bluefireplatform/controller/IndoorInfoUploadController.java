@@ -3,9 +3,11 @@
 /*    */ import com.alibaba.fastjson.JSONObject;
 /*    */ import com.bluefireplatform.service.MapService;
          import com.bluefireplatform.service.TrajectoryInfoManangeService;
-/*    */ import java.util.HashMap;
+/*    */ import java.io.IOException;
+import java.util.HashMap;
 /*    */ import java.util.Map;
 /*    */ import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 /*    */ import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.stereotype.Controller;
 /*    */ import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +38,11 @@
             {
                 return this.mapService.queryAllMap();
             }
+             @ResponseBody
+             @RequestMapping("/queryMapByMapId")
+             public Object queryMapByMapId(@RequestBody JSONObject queryString , HttpServletResponse rep) throws Exception {
+                 return mapService.queryMapByMapId(queryString , rep);
+             }
              @ResponseBody
              @RequestMapping("/getIndoorUsers")
              public Object getIndoorUsers(@RequestBody JSONObject queryString)

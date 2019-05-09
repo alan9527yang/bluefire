@@ -15,8 +15,7 @@ import java.util.Map;
 
 /*    */ @CrossOrigin
 /*    */ @Controller
-         @RequestMapping("/Integererface/analysis")
-/*    */ public class AnalysisController
+/*    */ public class testController
 /*    */ {
 /*    */   @Autowired
 /*    */   private OutTrajectoryService outTrajectoryService;
@@ -46,19 +45,25 @@ import java.util.Map;
         /*    */   }
                 @ResponseBody
     /*    */   @RequestMapping({"/getOutdoorSimilarity"})
-    /*    */   public Object userSimilarity(HttpServletRequest req) throws Exception {
-                    Map map= new HashMap();
-                    map.put("userAID","0");
-                    map.put("userBID","1");
-                    map.put("startDate","2008-07-04");
-                    map.put("endDate","2009-09-04");
-                    JSONObject queryString = new JSONObject(map);
+    /*    */   public Object userSimilarity(@RequestBody JSONObject queryString , HttpServletRequest req) throws Exception {
+
         /* 37 */     return this.userSimilarityService.userSimilarity(queryString ,req);
         /*    */   }
                 @ResponseBody
     /*    */   @RequestMapping({"/getEmpiricalandIntegererest"})
     /*    */   public Object EmpiricalandIntegererestTest(HttpServletRequest req) throws Exception {
         /* 37 */     return this.empiricalandIntegererestService.getAllEmpiricalandIntegererestService(req);
+        /*    */   }
+    @ResponseBody
+    /*    */   @RequestMapping({"/userSimilarity.action"})
+    /*    */   public Object userSimilarity(HttpServletRequest req) throws Exception {
+        Map map= new HashMap();
+        map.put("userAID","0");
+        map.put("userBID","1");
+        map.put("startDate","2008-07-04");
+        map.put("endDate","2009-09-04");
+        JSONObject queryString = new JSONObject(map);
+        /* 37 */     return this.userSimilarityService.userSimilarity(queryString ,req);
         /*    */   }
 }
 

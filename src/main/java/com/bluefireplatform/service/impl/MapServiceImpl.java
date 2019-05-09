@@ -2,27 +2,23 @@
 /*    */ 
 /*    */ import com.alibaba.fastjson.JSONObject;
 /*    */ import com.bluefireplatform.component.ReturnHelper;
-/*    */ import com.bluefireplatform.mapper.MapMapper;
+/*    */ import com.bluefireplatform.entity.Map;
+import com.bluefireplatform.mapper.MapMapper;
 /*    */ import com.bluefireplatform.service.MapService;
 /*    */ import java.io.File;
-/*    */ import java.util.HashMap;
+/*    */ import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
 /*    */ import java.util.List;
 /*    */ import javax.servlet.ServletContext;
 /*    */ import javax.servlet.http.HttpServletRequest;
-/*    */ import org.springframework.beans.factory.annotation.Autowired;
+/*    */ import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.stereotype.Service;
 /*    */ import org.springframework.web.multipart.MultipartFile;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
+
 /*    */ @Service
-/*    */ public class MapServiceImpl
-/*    */   implements MapService
+/*    */ public class MapServiceImpl implements MapService
 /*    */ {
 /*    */   @Autowired
 /*    */   private MapMapper mapMapper;
@@ -75,7 +71,27 @@
 /* 75 */     this.mapMapper.deleteByPrimaryKey(mapId);
 /* 76 */     return this.returnHelper.returnNau(null, 1000, "服务器正常");
 /*    */   }
-/*    */ }
+
+    @Override
+    public Object queryMapByMapId(JSONObject queryString, HttpServletResponse rep) throws Exception {
+        Integer mapId  = queryString.getInteger("mapId");
+        Map indoorMap = mapMapper.selectByPrimaryKey(mapId);
+        File file = new File(indoorMap.getMapSrc());
+
+        FileInputStream inputStream = new FileInputStream(file);
+        byte[] data = new byte[(int)file.length()];
+        inputStream.read(data);
+        inputStream.close();
+        rep.setContentType("image/png");
+        OutputStream os = rep.getOutputStream();
+        os.write(data);
+        os.flush();
+        os.close();
+        return returnHelper.returnNau(null,1000,"服务器正常");
+    }
+
+
+    /*    */ }
 
 
 /* Location:              C:\develop\BlueFire-Platform\WEB-INF\classes\!\com\bluefireplatform\service\impl\MapServiceImpl.class

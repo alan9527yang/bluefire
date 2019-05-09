@@ -2,6 +2,8 @@ package com.bluefireplatform.service;
 
 import com.alibaba.fastjson.JSONObject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public interface MapService
@@ -13,6 +15,8 @@ public interface MapService
     Object updateMap(JSONObject paramJSONObject);
 
     Object deleteMap(JSONObject paramJSONObject);
+
+    Object queryMapByMapId(JSONObject queryString , HttpServletResponse rep) throws Exception;
 }
 
 

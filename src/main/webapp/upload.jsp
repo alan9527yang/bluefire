@@ -35,7 +35,7 @@
 
     <input type="submit" value="热力图"/>
 </form>
-<form action="${pageContext.request.contextPath}/userSimilarity.action" method="post" >
+<form action="${pageContext.request.contextPath}/Integererface/analysis/getOutdoorSimilarity" method="post" >
 
     <input type="submit" value="用户相似度"/>
 </form>
@@ -43,7 +43,7 @@
 
     <input type="submit" value="兴趣度与经验值"/>
 </form>
-<form action="${pageContext.request.contextPath}/queryIndoorMap" method="post">
+<form action="${pageContext.request.contextPath}/Integererface/data_manage/queryMapByMapId" method="post">
     <input type="submit" value="查询所有室内地图">
 
 </form>

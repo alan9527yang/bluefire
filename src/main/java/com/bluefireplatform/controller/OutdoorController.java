@@ -8,11 +8,11 @@
          import org.springframework.beans.factory.annotation.Autowired;
 /*    */ import org.springframework.stereotype.Controller;
 /*    */ import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+         import org.springframework.web.bind.annotation.RequestBody;
+         import org.springframework.web.bind.annotation.RequestMapping;
 /*    */ import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+         import javax.servlet.http.HttpServletRequest;
 
 /*    */
 /*    */ 
@@ -54,10 +54,10 @@ import javax.servlet.http.HttpServletRequest;
 /*    */   }
 
            @ResponseBody
-           @RequestMapping({"/queryTrajectoryForecastResult.action"})
+           @RequestMapping({"/getTrajectoryPrediction"})
            public Object queryTrajectoryForecastResult() throws Exception {
             Map map = new HashMap();
-            map.put("result_id", Integer.valueOf(1));
+            map.put("resultId", Integer.valueOf(1));
             JSONObject queryString = new JSONObject(map);
             return this.outdoorTrajectoryForecastService.queryForecastResult(queryString);
 
@@ -77,11 +77,13 @@ import javax.servlet.http.HttpServletRequest;
         /* 37 */     return this.heatMapService.queryAllOutdoorTrajectoryDetails(queryString);
         /*    */   }
                 @ResponseBody
-    /*    */   @RequestMapping({"/userSimilarity.action"})
+    /*    */   @RequestMapping({"/userSimilarity"})
     /*    */   public Object userSimilarity(HttpServletRequest req) throws Exception {
                         Map map= new HashMap();
                         map.put("userAID","0");
                         map.put("userBID","1");
+                        map.put("startDate","2008-07-04");
+                        map.put("endDate","2009-09-04");
                         JSONObject queryString = new JSONObject(map);
         /* 37 */     return this.userSimilarityService.userSimilarity(queryString ,req);
         /*    */   }

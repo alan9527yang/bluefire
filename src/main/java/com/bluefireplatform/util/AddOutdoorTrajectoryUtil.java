@@ -44,6 +44,7 @@ import org.springframework.context.ApplicationContext;
 /*    */     }
 /* 34 */     return fileList;
 /*    */   }
+
 /*    */   
 /*    */   public static void main(String[] args) throws IOException {
 /* 38 */     ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
