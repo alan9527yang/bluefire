@@ -46,14 +46,29 @@ import java.util.Map;
         /*    */   }
                 @ResponseBody
     /*    */   @RequestMapping({"/getOutdoorSimilarity"})
-    /*    */   public Object userSimilarity(HttpServletRequest req) throws Exception {
-                    Map map= new HashMap();
-                    map.put("userAID","0");
-                    map.put("userBID","1");
-                    map.put("startDate","2008-07-04");
-                    map.put("endDate","2009-09-04");
-                    JSONObject queryString = new JSONObject(map);
+    /*    */   public Object getOutdoorSimilarity(@RequestBody JSONObject queryString ,HttpServletRequest req) throws Exception {
+
         /* 37 */     return this.userSimilarityService.userSimilarity(queryString ,req);
+        /*    */   }
+                @ResponseBody
+    /*    */   @RequestMapping({"/getIndoorSimilarity"})
+    /*    */   public Object getIndoorSimilarity(@RequestBody JSONObject queryString, HttpServletRequest req) throws Exception {
+
+
+        /* 37 */     return this.userSimilarityService.indoorUserSimilarity(queryString ,req);
+        /*    */   }
+    @ResponseBody
+    /*    */   @RequestMapping({"/getIndoorSimilarity2"})
+    /*    */   public Object getIndoorSimilarity(HttpServletRequest req) throws Exception {
+
+        Map map= new HashMap();
+        map.put("userAID",1);
+        map.put("userBID",2);
+        map.put("mapID",1);
+        map.put("startDate","2018-01-01");
+        map.put("endDate","2019-01-01");
+        JSONObject queryString = new JSONObject(map);
+        /* 37 */     return this.userSimilarityService.indoorUserSimilarity(queryString ,req);
         /*    */   }
                 @ResponseBody
     /*    */   @RequestMapping({"/getEmpiricalandIntegererest"})

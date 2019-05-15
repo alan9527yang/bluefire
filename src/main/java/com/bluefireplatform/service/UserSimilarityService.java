@@ -6,4 +6,5 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserSimilarityService {
     public Object userSimilarity(JSONObject queryString , HttpServletRequest req) throws Exception;
+    public Object indoorUserSimilarity(JSONObject queryString , HttpServletRequest req) throws Exception;
 }

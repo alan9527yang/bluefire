@@ -60,6 +60,38 @@ public class JythonUtil {
         return result;*/
         return "OK";
     }
+    public String indoorUserSimilarity(String originalSrc, String presentSrc) {
+        String pythonPath = "python ";
+        // filePath	指的是你本地的算法主函数地址--室内算法
+        String filePath = "/root/apache-tomcat-7.0.94/webapps/bluefire/Algorithm/indoor/indoortest.py ";
+        String result = "";
+        Process process = null;
+        List<String> processList = new java.util.ArrayList();
+        String line;
+        // 这里是将originalSrc和presentSrc传给python，python通过r_path和w_path两个变量接收（实质上下面的代码是在控制台上打一行命令，启动python算法）
+        try {
+            String commend = pythonPath + filePath + "--r_path " + originalSrc + " --w_path " + presentSrc;
+            process = Runtime.getRuntime().exec(pythonPath + filePath + "--r_path " + originalSrc + " --w_path " + presentSrc);
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            line = "";
+            while ((line = input.readLine()) != null) {
+                processList.add(line);
+            }
+            input.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 这里python处理完之后，返回控制台一个字符串存储在result里，比如“OK”，说明算法处理成功，
+        for (String s : processList) {
+            System.out.println(s);
+            result = result + s;
+        }
+
+        return result;
+
+    }
 
     public String compression(String originalSrc, String presentSrc) {
 

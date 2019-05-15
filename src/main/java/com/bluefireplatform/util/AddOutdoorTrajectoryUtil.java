@@ -27,7 +27,8 @@ import org.springframework.context.ApplicationContext;
 /* 20 */     if (file.isDirectory()) {
 /* 21 */       File[] files = file.listFiles();
 /* 22 */       File[] arrayOfFile1;
-                int j = (arrayOfFile1 = files).length; for (int i = 0; i < j; i++)
+                int j = (arrayOfFile1 = files).length;
+                for (int i = 0; i < j; i++)
                 {
                     File fileIndex = arrayOfFile1[i];
 /* 23 */         if (fileIndex.isDirectory())

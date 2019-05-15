@@ -39,6 +39,10 @@
 
     <input type="submit" value="用户相似度"/>
 </form>
+<form action="${pageContext.request.contextPath}/Integererface/analysis/getIndoorSimilarity2" method="post" >
+
+    <input type="submit" value="用户相似度"/>
+</form>
 <form action="${pageContext.request.contextPath}/interest" method="post" >
 
     <input type="submit" value="兴趣度与经验值"/>
