@@ -34,8 +34,8 @@ public class JythonUtil {
     }
 
     public String userSimilarity(String originalSrc, String presentSrc) {
-/*        String pythonPath = "/anaconda3/bin/python3.6 ";
-        String filePath = "/Users/yyzmac/Desktop/test/pythoncode/outdoortest.py ";
+        String pythonPath = "python ";
+        String filePath = "/root/apache-tomcat-7.0.94/webapps/bluefire/Algorithm/outdoor/outtest.py ";
         String result = "";
         Process process = null;
         List<String> processList = new java.util.ArrayList();
@@ -57,8 +57,7 @@ public class JythonUtil {
             System.out.println(s);
             result = result + s;
         }
-        return result;*/
-        return "OK";
+        return result;
     }
     public String indoorUserSimilarity(String originalSrc, String presentSrc) {
         String pythonPath = "python ";

@@ -50,7 +50,7 @@ import org.springframework.context.ApplicationContext;
 /*    */   public static void main(String[] args) throws IOException {
 /* 38 */     ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 /* 39 */     OutTrajectoryService outTrajectoryService = (OutTrajectoryService)context.getBean("outTrajectoryServiceImpl");
-/* 40 */     for (int i = 0; i < 2; i++) {
+/* 40 */     for (int i = 0; i < 6; i++) {
 /* 41 */       DecimalFormat df = new DecimalFormat("000");
 /* 42 */       String str = df.format(i);
 /* 43 */       AddOutdoorTrajectoryUtil addOutdoorTrajectoryUtil = new AddOutdoorTrajectoryUtil();

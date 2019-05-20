@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @CrossOrigin
 @Controller
@@ -41,9 +43,9 @@ public class LocationController {
 
     @ResponseBody
     @RequestMapping({"/addOutdoorLocation"})
-    public Object addOutdoorLocation(@RequestBody JSONObject queryString) {
+    public Object addOutdoorLocation(@RequestBody JSONObject queryString,HttpServletRequest req) throws Exception {
 
-        return this.outdoorRealTimeService.OutdoorRealTimeLocationUpload(queryString);
+        return this.outdoorRealTimeService.OutdoorRealTimeLocationUpload(queryString,req);
 
     }
 }

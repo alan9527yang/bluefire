@@ -39,7 +39,9 @@ public class UserSimilarityServiceImpl implements UserSimilarityService {
     @Override
     public Object userSimilarity(JSONObject queryString , HttpServletRequest req) throws Exception {
         Integer userAId= queryString.getInteger("userAID") ;
+        System.out.println(userAId);
         Integer userBId= queryString.getInteger("userBID") ;
+        System.out.println(userBId);
         String startDate= queryString.getString("startDate") + " 00:00:00";
         String endDate = queryString.getString("endDate") + " 23:59:59";
         long startTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse(startDate, new ParsePosition(0)).getTime()/ 1000;
@@ -49,12 +51,16 @@ public class UserSimilarityServiceImpl implements UserSimilarityService {
         OutTrajectoryExample example = new OutTrajectoryExample();
         OutTrajectoryExample.Criteria criteria = example.createCriteria();
 
+        OutTrajectoryExample example2 = new OutTrajectoryExample();
+        OutTrajectoryExample.Criteria criteria2 = example2.createCriteria();
+
         criteria.andUserIdEqualTo(userAId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
         List<OutTrajectory> outTrajectoriesA = outTrajectoryMapper.selectByExample(example);
+        System.out.println(outTrajectoriesA);
         example.clear();
-        criteria.andUserIdEqualTo(userBId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
-        List<OutTrajectory> outTrajectoriesB = outTrajectoryMapper.selectByExample(example);
-
+        criteria2.andUserIdEqualTo(userBId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
+        List<OutTrajectory> outTrajectoriesB = outTrajectoryMapper.selectByExample(example2);
+        System.out.println(outTrajectoriesB);
         for (OutTrajectory outTrajectory:outTrajectoriesA) {
              outTrajectoriesAJson.add(JSONObject.toJSON(outTrajectory));
         }
@@ -105,11 +111,14 @@ public class UserSimilarityServiceImpl implements UserSimilarityService {
         TrajectoryExample example = new TrajectoryExample();
         TrajectoryExample.Criteria criteria = example.createCriteria();
 
+        TrajectoryExample example2 = new TrajectoryExample();
+        TrajectoryExample.Criteria criteria2 = example2.createCriteria();
+
         criteria.andUserIdEqualTo(userAId).andMapIdEqualTo(mapId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
         List<Trajectory> trajectoriesA = trajectoryMapper.selectByExample(example);
         example.clear();
-        criteria.andUserIdEqualTo(userBId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
-        List<Trajectory> trajectoriesB = trajectoryMapper.selectByExample(example);
+        criteria2.andUserIdEqualTo(userBId).andMapIdEqualTo(mapId).andStartTimeGreaterThanOrEqualTo(startTime).andEndTimeLessThanOrEqualTo(endTime);
+        List<Trajectory> trajectoriesB = trajectoryMapper.selectByExample(example2);
 
         for (Trajectory outTrajectory:trajectoriesA) {
             trajectoriesAJson.add(JSONObject.toJSON(outTrajectory));
